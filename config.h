@@ -1,20 +1,20 @@
 /* See LICENSE file for copyright and license details. */
 
 /* Constants */
-#define TERMINAL "st"
-#define TERMCLASS "St"
+#define TERMINAL "alacritty"
+#define TERMCLASS "Alacritty"
 
 /* appearance */
-static unsigned int borderpx  = 3;        /* border pixel of windows */
+static unsigned int borderpx  = 0;//3;        /* border pixel of windows */
 static unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray        = 1;     /* 0 means no systray */
-static unsigned int gappih    = 20;       /* horiz inner gap between windows */
-static unsigned int gappiv    = 10;       /* vert inner gap between windows */
-static unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
-static unsigned int gappov    = 30;       /* vert outer gap between windows and screen edge */
+static unsigned int gappih    = 0;//20;       /* horiz inner gap between windows */
+static unsigned int gappiv    = 0;//10;       /* vert inner gap between windows */
+static unsigned int gappoh    = 0;//10;       /* horiz outer gap between windows and screen edge */
+static unsigned int gappov    = 0;//30;       /* vert outer gap between windows and screen edge */
 static int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static int showbar            = 1;        /* 0 means no bar */
@@ -27,12 +27,13 @@ static const int riodraw_spawnasync = 0;        /* 0 means that the application 
                                                  * 1 means that the application is being initialised in the background while the selection is made */
 //static char *fonts[]          = { "monospace:size=10", "JoyPixels:pixelsize=10:antialias=true:autohint=true"  };
 static char *fonts[] = {
-	"Iosevka Term Semibold Extended:size=10:antialias=true:autohint=true",
-	"JoyPixels:pixelsize=10:antialias=true:autohint=true" 
+	"monospace:size=15:style=bold:antialias=true",
+	"Font Awesome 5 Free:size=16:style=bold:antialias=true:autohint=true",
+	"Iosevka Term Semibold Extended:size=14:antialias=true:autohint=true",
 };
 
 /* Bar background color */
-static char normbgcolor[]           = "#15181E";
+static char normbgcolor[]           = "#151818";//"#151815";
 
 /* Bar foreground color */
 static char normfgcolor[]           = "#7FC1E9";
@@ -91,25 +92,25 @@ static int resizehints = 1;    /* 1 means respect size hints in tiled resizals *
 #include "vanitygaps.c"
 static const Layout layouts[] = {
 	/* symbol     arrange function */
- 	{ "[]=",	tile },			/* Default: Master on left, slaves on right */
+ 	{ "Tile",	tile },			/* Default: Master on left, slaves on right */
 	{ "TTT",	bstack },		/* Master on top, slaves on bottom */
 
 	{ "[@]",	spiral },		/* Fibonacci spiral */
 	{ "[\\]",	dwindle },		/* Decreasing in size right and leftward */
 
 	{ "H[]",	deck },			/* Master on left, slaves in monocle-like mode on right */
- 	{ "[M]",	monocle },		/* All windows on top of eachother */
+ 	{ "Monocle",	monocle },		/* All windows on top of eachother */
 
 	{ "|M|",	centeredmaster },		/* Master in middle, slaves on sides */
 	{ ">M>",	centeredfloatingmaster },	/* Same but master floats */
 
-	{ "><>",	NULL },			/* no layout function means floating behavior */
+	{ "Nil",	NULL },			/* no layout function means floating behavior */
 	{ NULL,		NULL },
 };
 
 /* key definitions */
-#define MODKEY Mod1Mask
-#define SUPERKEY Mod4Mask
+#define MODKEY Mod4Mask
+//#define SUPERKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -171,8 +172,8 @@ static Key keys[] = {
 	 * etc. */
 
 	/* modifier                     key        function        argument */
-	STACKKEYS(MODKEY,                          focus)
-	STACKKEYS(MODKEY|ShiftMask,                push)
+	//STACKKEYS(MODKEY,                          focus)
+	//STACKKEYS(MODKEY|ShiftMask,                push)
 	/* J and K are automatically bound above in STACKEYS */
 
 	/* [TAGS] */
@@ -189,89 +190,95 @@ static Key keys[] = {
 	TAGKEYS(			XK_0,		9)
 
 	/* Set various layouts */
-	{ MODKEY,			XK_t,		setlayout,	{.v = &layouts[0]} }, /* tile */
-	{ MODKEY|ShiftMask,		XK_t,		setlayout,	{.v = &layouts[1]} }, /* bstack */
-	{ MODKEY,			XK_y,		setlayout,	{.v = &layouts[2]} }, /* spiral */
-	{ MODKEY|ShiftMask,		XK_y,		setlayout,	{.v = &layouts[3]} }, /* dwindle */
-	{ MODKEY,			XK_u,		setlayout,	{.v = &layouts[4]} }, /* deck */
-	{ MODKEY|ShiftMask,		XK_u,		setlayout,	{.v = &layouts[5]} }, /* monocle */
-	{ MODKEY,			XK_i,		setlayout,	{.v = &layouts[6]} }, /* centeredmaster */
-	{ MODKEY|ShiftMask,		XK_i,		setlayout,	{.v = &layouts[7]} }, /* centeredfloatingmaster */
+	{ MODKEY,			XK_e,		setlayout,	{.v = &layouts[0]} }, /* tile */
+	//{ MODKEY|ShiftMask,		XK_t,		setlayout,	{.v = &layouts[1]} }, /* bstack */
+	//{ MODKEY,			XK_y,		setlayout,	{.v = &layouts[2]} }, /* spiral */
+	//{ MODKEY|ShiftMask,		XK_y,		setlayout,	{.v = &layouts[3]} }, /* dwindle */
+	//{ MODKEY,			XK_u,		setlayout,	{.v = &layouts[4]} }, /* deck */
+	{ MODKEY,			XK_w,		setlayout,	{.v = &layouts[5]} }, /* monocle */
+	//{ MODKEY,			XK_i,		setlayout,	{.v = &layouts[6]} }, /* centeredmaster */
+	//{ MODKEY|ShiftMask,		XK_i,		setlayout,	{.v = &layouts[7]} }, /* centeredfloatingmaster */
+
+	/* Focus stack (monocle)*/
+	// TODO: use XK_a/XK_s?
+	{ MODKEY|ShiftMask,  	XK_w, 		focusstack, 	{.i = +1}},
+	{ MODKEY|ShiftMask,  	XK_e, 		focusstack, 	{.i = -1}},
+
 
 	/* Switch between active tag and last opened tag */
-	{ MODKEY,			XK_Tab,		view,		{0} },
+	//{ MODKEY,			XK_Tab,		view,		{0} },
 
 	/* View the last opened tag */
-	{ MODKEY,			XK_backslash,	view,		{0} },
+	//{ MODKEY,			XK_backslash,	view,		{0} },
 
 	/* Cycle through tags */
-	{ MODKEY,			XK_g,		shiftview,	{ .i = -1 } },
+	//{ MODKEY,			XK_g,		shiftview,	{ .i = -1 } },
 
 	/* Interact with tags on other monitors */
-	{ MODKEY,			XK_Left,	focusmon,	{.i = -1 } },
-	{ MODKEY|ShiftMask,		XK_Left,	tagmon,		{.i = -1 } },
-	{ MODKEY,			XK_Right,	focusmon,	{.i = +1 } },
-	{ MODKEY|ShiftMask,		XK_Right,	tagmon,		{.i = +1 } },
+	//{ MODKEY,			XK_Left,	focusmon,	{.i = -1 } },
+	//{ MODKEY|ShiftMask,		XK_Left,	tagmon,		{.i = -1 } },
+	//{ MODKEY,			XK_Right,	focusmon,	{.i = +1 } },
+	//{ MODKEY|ShiftMask,		XK_Right,	tagmon,		{.i = +1 } },
 
 	/* Go a tag left */
-	{ MODKEY,			XK_Page_Up,	shiftview,	{ .i = -1 } },
+	//{ MODKEY,			XK_Page_Up,	shiftview,	{ .i = -1 } },
 	/* Go a tag right */
-	{ MODKEY,			XK_Page_Down,	shiftview,	{ .i = +1 } },
+	//{ MODKEY,			XK_Page_Down,	shiftview,	{ .i = +1 } },
 
 	/* Move window to tag on the left */
-	{ MODKEY|ShiftMask,		XK_Page_Up,	shifttag,	{ .i = -1 } },
+	//{ MODKEY|ShiftMask,		XK_Page_Up,	shifttag,	{ .i = -1 } },
 	/* Move window to tag on the right */
-	{ MODKEY|ShiftMask,		XK_Page_Down,	shifttag,	{ .i = +1 } },
+	//{ MODKEY|ShiftMask,		XK_Page_Down,	shifttag,	{ .i = +1 } },
 
 	/* [WINDOWS] */
 
 	/* Sticky windows */
-	{ MODKEY,			XK_s,		togglesticky,	{0} },
+	//{ MODKEY,			XK_s,		togglesticky,	{0} },
 
 	/* Increase/decrease the number of master windows */
-	{ MODKEY,			XK_o,		incnmaster,     {.i = +1 } },
-	{ MODKEY|ShiftMask,		XK_o,		incnmaster,     {.i = -1 } },
+	//{ MODKEY,			XK_o,		incnmaster,     {.i = +1 } },
+	//{ MODKEY|ShiftMask,		XK_o,		incnmaster,     {.i = -1 } },
 
 	/* Kill a window */
-	{ MODKEY,			XK_F4,		killclient,	{0} },
+	{ MODKEY|ShiftMask,		XK_q,		killclient,	{0} },
 
 	/* Move window to previous tag */
-	{ MODKEY|ShiftMask,		XK_g,		shifttag,	{ .i = -1 } },
+	//{ MODKEY|ShiftMask,		XK_g,		shifttag,	{ .i = -1 } },
 
 	/* Resize window left (make it smaller)*/
-	{ MODKEY,			XK_h,		setmfact,	{.f = -0.05} },
+	//{ MODKEY,			XK_h,		setmfact,	{.f = -0.05} },
 	/* Resize window right (make it bigger) */
-	{ MODKEY,			XK_l,		setmfact,      	{.f = +0.05} },
+	//{ MODKEY,			XK_l,		setmfact,      	{.f = +0.05} },
 
 	/* Resize window up (make it taller) */
-	{ MODKEY|ControlMask,             XK_h,		setcfact,       {.f = +0.25} },
+	//{ MODKEY|ControlMask,             XK_h,		setcfact,       {.f = +0.25} },
 	/* Resize window down (make it shorter) */
-	{ MODKEY|ControlMask,             XK_l,		setcfact,       {.f = -0.25} },
+	//{ MODKEY|ControlMask,             XK_l,		setcfact,       {.f = -0.25} },
 	/* Reset window height */
-	{ MODKEY|ControlMask,             XK_o,		setcfact,       {.f =  0.00} },
+	//{ MODKEY|ControlMask,             XK_o,		setcfact,       {.f =  0.00} },
 
 	/* Resize window like Plan9's rio (Rio-Resize patch) */
-	{ MODKEY,                       XK_r,		rioresize,      {0} },
+	//{ MODKEY,                       XK_r,		rioresize,      {0} },
 
 	/* Spawn a new floating terminal, like Plan9's rio (Rio-Resize patch) */
-	{ MODKEY|ControlMask,           XK_Return,	riospawn,       {.v = termcmd } },
+	//{ MODKEY|ControlMask,           XK_Return,	riospawn,       {.v = termcmd } },
 
 	/* Promote selected window to master */
-	{ MODKEY,			XK_space,	zoom,		{0} },
+	//{ MODKEY,			XK_space,	zoom,		{0} },
 
 	/* Toggle floating mode for a window */
-	{ MODKEY|ShiftMask,		XK_space,	togglefloating,	{0} },
+	//{ MODKEY|ShiftMask,		XK_space,	togglefloating,	{0} },
 
 	/* [GAPS] */
 	/* Toggle gaps */
-	{ SUPERKEY,			XK_g,		togglegaps,	{0} },
+	//{ SUPERKEY,			XK_g,		togglegaps,	{0} },
 
 	/* Reset gaps to default size */
-	{ SUPERKEY|ShiftMask,		XK_a,		defaultgaps,	{0} },
+	//{ SUPERKEY|ShiftMask,		XK_a,		defaultgaps,	{0} },
 
 	/* Increase/decrease gaps */
-	{ MODKEY,			XK_z,		incrgaps,	{.i = +3 } },
-	{ MODKEY,			XK_x,		incrgaps,	{.i = -3 } },
+	//{ MODKEY,			XK_z,		incrgaps,	{.i = +3 } },
+	//{ MODKEY,			XK_x,		incrgaps,	{.i = -3 } },
 
 	/* [DWM] */
 
@@ -279,16 +286,16 @@ static Key keys[] = {
 	{ MODKEY,			XK_f,		togglefullscr,	{0} },
 
 	/* Show/hide bar */
-	{ MODKEY,			XK_b,		togglebar,	{0} },
+	//{ MODKEY,			XK_b,		togglebar,	{0} },
 
 	/* Lock the screen */
-	{ SUPERKEY,			XK_l,		spawn,		SHCMD("st -e ~/.config/scripts/screenlock") },
+	//{ SUPERKEY,			XK_l,		spawn,		SHCMD("st -e ~/.config/scripts/screenlock") },
 
-	/* Close DWM */
+	/* Close (Restart) DWM */
 	{ MODKEY|ShiftMask,		XK_c,		quit,		{0} },
 
 	/* Restart DWM */
-	{ MODKEY|ShiftMask,		XK_r,		quit,		{1} },
+	//{ MODKEY|ShiftMask,		XK_r,		quit,		{1} },
 
 	/* >>> PROGRAMS <<<
 	 * These keybindings will be used to open programs. */
@@ -297,60 +304,63 @@ static Key keys[] = {
 	/* Launch a terminal (st) */
 	{ MODKEY,			XK_Return,	spawn,		{.v = termcmd } },
 	/* Open/close terminal (st) in scratchpad */
-	{ MODKEY|ShiftMask,		XK_Return,	togglescratch,	{.ui = 0} },
+	//{ MODKEY|ShiftMask,		XK_Return,	togglescratch,	{.ui = 0} },
 
 	/* [VIDEO] */
 	/* Take a screenshot */
-	{ 0,				XK_Print,	spawn,		SHCMD("cd ~/Pictures && scrot -q 100 -p 'Screenshot-%d%b%4Y-%a-%H-%M-%S.png'") },
+	{ 0,				XK_Print,	spawn,		SHCMD("flameshot gui") },
 	/* Select area to screenshot */
-	{ MODKEY,			XK_Print,	spawn,		SHCMD("cd ~/Pictures && scrot -q 100 -sp 'Screenshot-%d%b%4Y-%a-%H-%M-%S.png'") },
+	//{ MODKEY,			XK_Print,	spawn,		SHCMD("cd ~/Pictures && scrot -q 100 -sp 'Screenshot-%d%b%4Y-%a-%H-%M-%S.png'") },
 	/* Show webcam */
-	{ MODKEY,			XK_F7,		spawn,		SHCMD("mpv av://v4l2:/dev/video0 --title=webcam /dev/video0 || notify-send -u critical 'Webcam' 'Could not open webcam!'") },
+	//{ MODKEY,			XK_F7,		spawn,		SHCMD("mpv av://v4l2:/dev/video0 --title=webcam /dev/video0 || notify-send -u critical 'Webcam' 'Could not open webcam!'") },
 
 	/* [LAUNCHER] */
 	/* Launch dmenu */
-	{ MODKEY|ShiftMask,		XK_d,		spawn,		SHCMD("dmenu_run") },
+	{ MODKEY,			XK_d,		spawn,		SHCMD("dmenu_run") },
 	/* Launch rofi */
-	{ MODKEY,			XK_d,		spawn,		SHCMD("rofi -show-icons -lines 12 -padding 18 -width 60 -location 0 -show drun -sidebar-mode -columns 3 -font 'Noto Sans 8'") },
+	//{ MODKEY,			XK_d,		spawn,		SHCMD("rofi -show-icons -lines 12 -padding 18 -width 60 -location 0 -show drun -sidebar-mode -columns 3 -font 'Noto Sans 8'") },
 	/* Launch networkmanager-dmenu */
-	{ SUPERKEY,			XK_n,		spawn,		SHCMD("networkmanager_dmenu") },
+	//{ SUPERKEY,			XK_n,		spawn,		SHCMD("networkmanager_dmenu") },
 
 	/* [OTHERS] */
 	/* Open file manager */
-	{ MODKEY|ShiftMask,		XK_f,		spawn,		SHCMD("nemo") },
+	//{ MODKEY|ShiftMask,		XK_f,		spawn,		SHCMD("nemo") },
 	/* Open Surf */
-	{ MODKEY|ShiftMask,		XK_s,		spawn,		SHCMD("tabbed -c surf -BNPTge & disown") },
+	//{ MODKEY|ShiftMask,		XK_s,		spawn,		SHCMD("tabbed -c surf -BNPTge & disown") },
 	/* Open Firefox */
-	{ MODKEY|ShiftMask,		XK_w,		spawn,		SHCMD("firefox") },
+	//{ MODKEY|ShiftMask,		XK_w,		spawn,		SHCMD("firefox") },
 	/* Open LibreWolf */
-	{ MODKEY|ShiftMask,		XK_q,		spawn,		SHCMD("librewolf") },
+	//{ MODKEY|ShiftMask,		XK_q,		spawn,		SHCMD("librewolf") },
 
 	/* [SPECIAL KEYS] */
 	/* [AUDIO] */
 	/* Mute audio */
-	{ 0, XF86XK_AudioMute,				spawn,		SHCMD("amixer -qD pulse sset Master toggle; kill -44 $(pidof dwmblocks)") },
+	//{ 0, XF86XK_AudioMute,				spawn,		SHCMD("amixer -qD pulse sset Master toggle; kill -44 $(pidof dwmblocks)") },
 	/* Raise/lower volume */
-	{ 0, XF86XK_AudioRaiseVolume,			spawn,		SHCMD("amixer -qD pulse sset Master 5%+; kill -44 $(pidof dwmblocks)") },
-	{ 0, XF86XK_AudioLowerVolume,			spawn,		SHCMD("amixer -qD pulse sset Master 5%-; kill -44 $(pidof dwmblocks)") },
+	//{ 0, XF86XK_AudioRaiseVolume,			spawn,		SHCMD("amixer -qD pulse sset Master 5%+; kill -44 $(pidof dwmblocks)") },
+	//{ 0, XF86XK_AudioLowerVolume,			spawn,		SHCMD("amixer -qD pulse sset Master 5%-; kill -44 $(pidof dwmblocks)") },
 	/* Mute microphone */
-	{ 0, XF86XK_AudioMicMute,			spawn,		SHCMD("amixer -qD pulse sset Capture toggle; kill -44 $(pidof dwmblocks)") },
+	//{ 0, XF86XK_AudioMicMute,			spawn,		SHCMD("amixer -qD pulse sset Capture toggle; kill -44 $(pidof dwmblocks)") },
 
 	/* [VIDEO] */
 	/* Toggle screenkey */
-	{ MODKEY|ShiftMask,		XK_Print,	spawn,		SHCMD("killall screenkey || screenkey &") },
-	{ 0, XF86XK_Tools,				spawn,		SHCMD("killall screenkey || screenkey &") },
+	//{ MODKEY|ShiftMask,		XK_Print,	spawn,		SHCMD("killall screenkey || screenkey &") },
+	//{ 0, XF86XK_Tools,				spawn,		SHCMD("killall screenkey || screenkey &") },
 	/* When Caps Lock is pressed, update the bar */
-	{ 0,				XK_Caps_Lock,	spawn,		SHCMD("kill -36 dwmblocks") },
+	//{ 0,				XK_Caps_Lock,	spawn,		SHCMD("kill -36 dwmblocks") },
 
 	/* [OTHER] */
 	/* Enable/disable/toggle touchpad */
+	/*
 	{ 0, XF86XK_TouchpadOn,				spawn,		SHCMD("synclient TouchpadOff=0") },
 	{ 0, XF86XK_TouchpadOff,			spawn,		SHCMD("synclient TouchpadOff=1") },
 	{ 0, XF86XK_TouchpadToggle,			spawn,		SHCMD("(synclient | grep 'TouchpadOff.*1' && synclient TouchpadOff=0) || synclient TouchpadOff=1") },
+	*/
 
 	/* >>>SCRIPTS<<< */
 	/* These keybindings will be used to launch scripts */
 	/* [SUPER-BOUND] */
+	/*
 	{ SUPERKEY,			XK_d,		spawn,		SHCMD("st -e ~/.config/scripts/displayselect") },
 	{ SUPERKEY,			XK_f,		spawn,		SHCMD("st -e ~/.config/scripts/set-fan") },
 	{ SUPERKEY,			XK_i,		spawn,		SHCMD("st -e ~/.config/scripts/inactivity") },
@@ -364,14 +374,15 @@ static Key keys[] = {
 	{ SUPERKEY|ShiftMask,		XK_e,		spawn,		SHCMD("st -e ~/.config/scripts/dmenuunicode") },
 	{ SUPERKEY|ShiftMask,		XK_r,		spawn,		SHCMD("st -e ~/.config/scripts/reminder") },
 	{ SUPERKEY|ShiftMask,		XK_u,		spawn,		SHCMD("st -e ~/.config/scripts/disk-usage") },
-
+	*/
 	/* [FNKEY-BOUND] */
+	/*
 	{ 0, XF86XK_Display,				spawn,		SHCMD("st -e ~/.config/scripts/webcam") },
 	{ 0, XF86XK_LaunchA,				spawn,		SHCMD("st -e ~/.config/scripts/launcher") },
 	{ 0, XF86XK_MonBrightnessDown,			spawn,		SHCMD("xbacklight -dec 10; kill -45 $(pidof dwmblocks)") },
 	{ 0, XF86XK_MonBrightnessUp,			spawn,		SHCMD("xbacklight -inc 10; kill -45 $(pidof dwmblocks)") },
 	{ 0, XF86XK_Search,				spawn,		SHCMD("st -e ~/.config/scripts/downloader") },
-
+	*/
 };
 
 /* button definitions */
@@ -388,7 +399,7 @@ static Button buttons[] = {
 	{ ClkStatusText,        0,              Button5,        sigdwmblocks,   {.i = 5} },
 	{ ClkStatusText,        ShiftMask,      Button1,        sigdwmblocks,   {.i = 6} },
 #endif
-	{ ClkStatusText,        ShiftMask,      Button3,        spawn,          SHCMD(TERMINAL " -e nvim ~/dwm/dwmblocks/config.h") },
+	//{ ClkStatusText,        ShiftMask,      Button3,        spawn,          SHCMD(TERMINAL " -e nvim ~/dwm/dwmblocks/config.h") },
 	/* placemouse options, choose which feels more natural:
 	 *    0 - tiled position is relative to mouse cursor
 	 *    1 - tiled position is relative to window center
@@ -400,16 +411,16 @@ static Button buttons[] = {
 	 * into a floating position).
 	 */
 	{ ClkClientWin,         MODKEY,         Button1,        moveorplace,    {.i = 1} },
-	{ ClkClientWin,         MODKEY,         Button2,        defaultgaps,	{0} },
+	//{ ClkClientWin,         MODKEY,         Button2,        defaultgaps,	{0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
 	{ ClkClientWin,         MODKEY|ShiftMask, Button3,      dragcfact,      {0} },
-	{ ClkClientWin,		MODKEY,		Button4,	incrgaps,	{.i = +1} },
-	{ ClkClientWin,		MODKEY,		Button5,	incrgaps,	{.i = -1} },
+	//{ ClkClientWin,		MODKEY,		Button4,	incrgaps,	{.i = +1} },
+	//{ ClkClientWin,		MODKEY,		Button5,	incrgaps,	{.i = -1} },
 	{ ClkTagBar,            0,              Button1,        view,           {0} },
-	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
+	//{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
-	{ ClkTagBar,		0,		Button4,	shiftview,	{.i = -1} },
-	{ ClkTagBar,		0,		Button5,	shiftview,	{.i = 1} },
+	//{ ClkTagBar,		0,		Button4,	shiftview,	{.i = -1} },
+	//{ ClkTagBar,		0,		Button5,	shiftview,	{.i = 1} },
 	{ ClkRootWin,		0,		Button2,	togglebar,	{0} },
 };
