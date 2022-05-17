@@ -1,0 +1,19 @@
+#!/bin/sh
+# display current brightness
+
+# get first two digits of brightness value
+brightnum=$(xbacklight -get)
+brightness=$(printf "${brightnum%.*}")
+
+case $BLOCK_BUTTON in
+	4) xbacklight -inc 1 ;;
+	5) xbacklight -dec 1 ;;
+esac
+
+if [[ "$brightness" -gt "70" ]]; then
+	echo "☀$brightness"
+elif [[ "$brightness" -lt "30" ]]; then
+	echo "🌦$brightness"
+else
+	echo "⛅$brightness"
+fi
