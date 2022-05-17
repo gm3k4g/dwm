@@ -1,4 +1,38 @@
-# Salonia Matteo's build of dwm
+# gm3k4g's build of dwm
+## gm3k4g: Taken directly from Salonia Matteo. Read below for the original README.md!
+
+This build comes with:
+- systray
+- clickable statusbar
+- fullscreen
+
+- This build of dwm is essentially the same as the original fork, with the only difference being that there are many shortcut changes in `config.h`, as well as the removal of some additional utilities. 
+
+- The focus is mostly on `monocle` and `tile` modes. Many more shortcuts were removed, and those which served functionality purposes were commented out (e.g. increase/decrease volume function keys) just in case they may be needed.
+Check out `config.h` to change things as you want.
+
+The build process is simple:
+1. `git clone https://github.com/gm3k4g/dwm`
+2. `cd dwm`
+3. `sudo make install dwm`
+
+- This will install `dwm` to `/usr/local/bin`.
+
+NOTE: This build of `dwm` uses the following programs:
+- **alacritty** as the primary terminal emulator
+- **flameshot** for taking screenshots (binded to the Printscreen key)
+- **dmenu** for running programs
+
+Make sure that you also install the appropriate fonts to get `dwm` fonts working correctly.
+
+## Credits
+
+- Creating this would be impossible without Salonia Matteo and Luke Smith's builds of `dwm` and `dwmblocks` respectively.
+
+Original README.md
+===========
+
+## Salonia Matteo's build of dwm
 
 This build of dwm has an updated `man` page over at [`dwm.1`](https://github.com/saloniamatteo/dwm/blob/master/dwm.1), containing all of the keybindings. You can also directly look at the source code, inside [`config.h`](https://github.com/saloniamatteo/dwm/blob/master/config.h)
 

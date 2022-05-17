@@ -11,7 +11,7 @@
 3. `sudo make install`
 
 - This will install `dwmblocks` directly into `/usr/local/bin`.
-- Alternatively, if you just want to test and modify `dwmblocks` to your liking without installing, you can simply run `make` instead of `sudo make install`. Then you can run the generated executable and see if it works as intended.
+- Alternatively, if you just want to test and modify `dwmblocks` to your liking without installing, you can simply run `make` instead. Then you can run the generated executable and see if it works as intended.
 
 # Scripts
 
@@ -22,9 +22,9 @@
 	- Disk usage (storage)
 	- Memory usage: Shows memory hoggers.
 	- etc.
-- If you want more scripts, you can check the original README below.
+- If you want more scripts, check the original README below.
 
-To make them work, you'll first want to check these scripts and make sure that you have the applications installed.
+To make them work, you'll first want to check these scripts and make sure that you have the required applications installed in order for them to work.
 
 After that's done, you'll want to copy them to your `$HOME/.local/bin` directory, and make them executable. You can do this like so:
 
