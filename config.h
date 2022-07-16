@@ -92,14 +92,14 @@ static int resizehints = 1;    /* 1 means respect size hints in tiled resizals *
 #include "vanitygaps.c"
 static const Layout layouts[] = {
 	/* symbol     arrange function */
- 	{ "Tile",	tile },			/* Default: Master on left, slaves on right */
+ 	{ "Columns",	tile },			/* Default: Master on left, slaves on right */
 	{ "TTT",	bstack },		/* Master on top, slaves on bottom */
 
 	{ "[@]",	spiral },		/* Fibonacci spiral */
 	{ "[\\]",	dwindle },		/* Decreasing in size right and leftward */
 
 	{ "H[]",	deck },			/* Master on left, slaves in monocle-like mode on right */
- 	{ "Monocle",	monocle },		/* All windows on top of eachother */
+ 	{ "Max",	monocle },		/* All windows on top of eachother */
 
 	{ "|M|",	centeredmaster },		/* Master in middle, slaves on sides */
 	{ ">M>",	centeredfloatingmaster },	/* Same but master floats */
@@ -200,9 +200,8 @@ static Key keys[] = {
 	//{ MODKEY|ShiftMask,		XK_i,		setlayout,	{.v = &layouts[7]} }, /* centeredfloatingmaster */
 
 	/* Focus stack (monocle)*/
-	// TODO: use XK_a/XK_s?
-	{ MODKEY|ShiftMask,  	XK_w, 		focusstack, 	{.i = +1}},
-	{ MODKEY|ShiftMask,  	XK_e, 		focusstack, 	{.i = -1}},
+	{ MODKEY,  	XK_s, 		focusstack, 	{.i = +1}},
+	{ MODKEY,  	XK_a, 		focusstack, 	{.i = -1}},
 
 
 	/* Switch between active tag and last opened tag */
